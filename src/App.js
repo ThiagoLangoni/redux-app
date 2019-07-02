@@ -1,44 +1,32 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {clickButton} from './actions';
-
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { mudandoCampoTexto } from './actions';
+import { clicandoBotao } from './actions';
+import CampoDetalhe from './containers/campo-detalhe';
 import './App.css';
 
-
-
 class App extends Component {
+  state = { campotexto: '' }
 
-  state = {
-    inputValue: ''
-  }
-
-  inputChange = event => {
-    this.setState({inputValue: event.target.value})
+  onChange = (e) => {
+    this.setState({campotexto: e.target.value});
+    this.props.mudandoCampoTexto(e.target.value);
   }
 
   render() {
-
-    const {newValue, clickButton} = this.props;
-    const {inputValue} = this.state;
-
     return (
       <div className="App" style={{ paddingTop: '10px' }}>
-        <input type='text' id="txtCampo" value={inputValue} onChange={this.inputChange} />
-        <button onClick={() => clickButton(inputValue)}>
-          Click me!
-        </button>
-        <h1>{newValue}</h1>
-        <h1>{inputValue}</h1>
+        <input type="text" id="txtCampo" onChange={(e) => this.onChange(e)} />
+        <input type="button" id="btnTrocaTexto" value="Clica ae!" onClick={() => this.props.clicandoBotao(this.state.campotexto)} />
+        <CampoDetalhe />
       </div>
     );
   }
 }
 
-const mapStateToProps = store => ({
-  newValue: store.clickState.newValue
-})
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators({ mudandoCampoTexto: mudandoCampoTexto,clicandoBotao: clicandoBotao}, dispatch);
+}
 
-const mapDispatchToProps = dispatch => bindActionCreators({clickButton}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, matchDispatchToProps)(App);

@@ -1,17 +1,15 @@
-import {CLICK_UPDATE_VALUE} from './actionTypes'
-import {ONCHANGE_UPDATE_VALUE} from './actionTypes'
+import {ATUALIZANDO_CAMPO_TEXT, BOTAO_ATUALIZAR_CAMPO_CLICK} from './actions-types'
 
-export const clickButton = (value) => (
-    {
-        type: CLICK_UPDATE_VALUE,
-        newValue: value
+export const mudandoCampoTexto = (value) => {
+    return {
+        type: ATUALIZANDO_CAMPO_TEXT,
+        data: value
     }
-)
+}
 
-export const onChangeText = (value) => (
-    {
-        type: ONCHANGE_UPDATE_VALUE,
-        newValue: value
+export const clicandoBotao = (value) => {
+    return {
+        type: BOTAO_ATUALIZAR_CAMPO_CLICK,
+        data: value + ' Clicado ;)'
     }
-)
-
+}

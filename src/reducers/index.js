@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux'
-import {clickReducer} from './clickReducer'
+import MudandoTextoCampoReducer from './reducer-actions'
 
-
-export const Reducers  = combineReducers({
-    clickState: clickReducer
+const allReducers  = combineReducers({
+    novoValorCampo: MudandoTextoCampoReducer
 });
+
+export default allReducers
